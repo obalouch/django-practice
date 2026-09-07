@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+{% load blog_tags %}
+{% block title %}
+
+    {{post.title}}
+
+{% endblock title %}
+
+{% block content %}
+    <h1>
+        {{post.title}}
+    </h1>
+    <p class="date">
+        Published : {{post.publish}} by {{post.author}}
+    </p>
+    {{post.body|markdown}}
+    <p>
+        <a href="{% url 'blog:post_share' post.id %}">share this post</a>
+    </p>
+    {% for post in similar_posts %}
+    <p>also look at 
+        <a href="{{post.get_absolute_url}}">{{post.title}}</a>
+    </p>
+    {% endfor %}
+    {% with comments.count as total_comment %}
+        <h2>
+            {{total_comment}} comment{{total_comment|pluralize}}
+        </h2>
+    {% endwith %}
+    {% for comment in comments %}
+        <div class="comment">
+            <p class="info">
+                comment {{forloop.counter}} by {{comment.name}} {{comment.created}}
+            </p>
+            {{comment.body|linebreaks}}
+        </div>
+    {% empty %}
+        <p>No Comment added</p>
+    {% endfor %}
+    {% include "blog/post/include/commentForm.html" %}
+{% endblock content %}

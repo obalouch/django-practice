@@ -1,0 +1,46 @@
+{% load static %}
+{% load solo_tags %}
+<html>
+    <head>
+        <title>
+            {% block title %}{% endblock title %}
+        </title>
+        <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div id="content">
+            {% block content %}{% endblock content %}
+        </div>
+        <div id="sidebar">
+            <h2>
+                this is 
+                <a href="{% url 'solo:post' %}">Home</a>
+            </h2>
+            <h4>
+                Total posts : {% TotalPosts %}
+            </h4>
+            <h4>
+                Latest Post :
+                
+            </h4>
+            <h5>
+                {% LatestPost 3 %}
+            </h5>
+            <h4>
+                Most Commented Posts :
+            </h4>
+            <h5>
+                {% mostComments as MostCommentedPost %}
+                <ul>
+                    {% for post in MostCommentedPost %}
+                    <li>
+                        <a href="{{post.get_absolute_url}}">{{post.title}}</a> : {{post.comments.count}} comment{{post.comments.count|pluralize}}
+                    </li>
+                    {% endfor %}
+                </ul>
+                
+
+            </h5>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'solopost/blog/base.html' %}
+
+{% block title %}
+    Share post
+{% endblock title %}
+
+{% block content %}
+
+    {% if sent %}
+        <h2>
+            E-mail sent succesfully
+        </h2>
+        <p>
+            {{post.title}} was sent {{form.cleaned_data.to}}
+        </p>
+    {% else %}
+        <form method="POST">
+            {{form.as_p}}
+            {% csrf_token %}
+            <input type="submit" value="send E-mail">
+        </form>
+    {% endif %}
+{% endblock content %}
