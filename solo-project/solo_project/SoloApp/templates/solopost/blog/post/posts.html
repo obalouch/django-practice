@@ -1,5 +1,5 @@
 {% extends 'solopost/blog/base.html' %}
-
+{% load solo_tags %}
 {% block title %}
    
         Posts
@@ -27,7 +27,7 @@
             <a href="{% url 'solo:post_by_tag' tag.slug %}">{{tag.name}}</a>
             {% if not forloop.last %}, {% endif%}
         {% endfor %}
-        {{post.body|truncatewords:30|linebreaks}}
+        {{post.body|markdown|truncatewords_html:30}}
     {% endfor %}
 {% include 'solopost/blog/paginations.html' with page=posts %}
 {% endblock content %}

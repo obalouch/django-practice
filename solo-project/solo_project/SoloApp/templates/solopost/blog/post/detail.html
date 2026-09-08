@@ -1,5 +1,5 @@
 {% extends 'solopost/blog/base.html' %}
-
+{% load solo_tags %}
 {% block title %}
     {{post.title}}
 {% endblock title %}
@@ -32,7 +32,7 @@
         <p class="info">
             comment {{forloop.counter}} by {{comment.name}} {{comment.created}}
         </p>
-      {{comment.body|linebreaks}}
+      {{comment.body|markdown}}
     </div>  
     {% empty %}
         No Comment added
