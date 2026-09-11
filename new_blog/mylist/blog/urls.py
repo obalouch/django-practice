@@ -10,5 +10,6 @@ urlpatterns = [
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='post_detail'),
     path('<int:post_id>/share/',views.post_share,name='post_share'),
     path('<int:post_id>/comment',views.comment_post,name='comment_post'),
-    path('feed/',LatestPostsFeed(),name='post_feed')
+    path('feed/',LatestPostsFeed(),name='post_feed'),
+    path('search',views.postSearch,name='postSearch')
 ]# path('',views.PostListView.as_view(),name='pos_tlist'),
