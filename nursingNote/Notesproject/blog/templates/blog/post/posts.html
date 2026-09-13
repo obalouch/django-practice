@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+Nursing Notes
+{% endblock title %}
+
+{% block content %}
+<h3>
+    Nursing Notes
+</h3>
+ <ul>
+    {% for post in posts %}
+        <li>
+            <a href="{{post.get_absolute_url}}">{{post.title}}</a>
+            <p>
+                {{post.body|truncatewords:30}}
+            </p>
+            <p>
+                By {{post.author}} at {{post.publish}}
+            </p>
+        </li>
+        {% empty %}
+            <p>
+                No content
+            </p>
+        {% endfor %}
+ </ul>
+{% endblock content %}

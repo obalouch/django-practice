@@ -1,0 +1,8 @@
+<h4>
+    Comment :
+</h4>
+<form action="{% url 'blog:comment' post.id %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit">
+</form>

@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+
+{% block title  %}
+    {{post.title}}
+{% endblock title %}
+
+{% block content %}
+    <h4>
+        Reading : {{post.title}}
+        <p>
+            <h6>
+                By {{post.author}} at {{post.publish}}
+            </h6>
+        </p>
+    </h4>
+    <p>
+        <h4>
+            {{post.body|linebreaks}}
+        </h4>
+    </p>
+    <p>
+        {% with comments.count as total_comment %}
+            {{total_comment}} Comment{{total_comment|pluralize}}
+        {% endwith %}
+    </p>
+    <p>
+        {% for comment in comments %}
+             <p>
+                comment {{forloop_count}} by {{comment.name}}
+                {{comment.body|linebreaks}}
+             </p>
+        {% empty %}
+             No Comments
+        {% endfor %}
+        
+        {% include 'blog/commentform.html' %}
+    </p>
+    <p>
+        <a href="{% url 'blog:posts' %}">Home</a>
+    </p>
+ {% endblock content %}
